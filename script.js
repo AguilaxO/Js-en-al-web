@@ -1,5 +1,9 @@
-const btn = document.querySelector("[data-form-btn]");
+import checkComplete from "./components/tareaCompletada.js";
+import iconoBorrar from "./components/borrarTarea.js";
 
+// Immediately invoked function expression IIFE
+( () => {
+const btn = document.querySelector("[data-form-btn]");
 const createTask = (evento) => {
     // Evitar el comportamiento normal del evento, en este caso el click al elemento botón
     evento.preventDefault();
@@ -20,24 +24,14 @@ const createTask = (evento) => {
     const taskContenido = document.createElement("div");
     taskContenido.appendChild(checkComplete());
     task.appendChild(taskContenido);
+    task.appendChild(iconoBorrar());
     const taskTitulo = document.createElement("span");
     taskTitulo.classList.add('task');
     taskTitulo.innerText = value;
     taskContenido.appendChild(taskTitulo);
-    // Establecer el contenido que se mostrará en el li
-    const contenido = `
-  <i class="fas fa-trash-alt trashIcon icon"></i>`
-    // Agregar el contenido que debe llevar el li
-    // task.innerHTML = contenido;
-
-}
-
-console.log(btn);
+	
+};
 
 btn.addEventListener("click", createTask);
 
-const checkComplete = () => {
-    const i = document.createElement("i");
-    i.classList.add('far', 'fa-check-square', 'icon');
-    return i;
-}
+}) ();
