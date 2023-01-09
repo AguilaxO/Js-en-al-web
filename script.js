@@ -17,17 +17,27 @@ const createTask = (evento) => {
     task.classList.add("card");
     // Al elemento lista agregar el li creado anteriormente
     lista.appendChild(task);
+    const taskContenido = document.createElement("div");
+    taskContenido.appendChild(checkComplete());
+    task.appendChild(taskContenido);
+    const taskTitulo = document.createElement("span");
+    taskTitulo.classList.add('task');
+    taskTitulo.innerText = value;
+    taskContenido.appendChild(taskTitulo);
     // Establecer el contenido que se mostrará en el li
-    const contenido = `<div>
-    <i class="far fa-check-square icon"></i>
-    <span class="task">${value}</span>
-  </div>
+    const contenido = `
   <i class="fas fa-trash-alt trashIcon icon"></i>`
     // Agregar el contenido que debe llevar el li
-    task.innerHTML = contenido;
+    // task.innerHTML = contenido;
 
 }
 
 console.log(btn);
 
 btn.addEventListener("click", createTask);
+
+const checkComplete = () => {
+    const i = document.createElement("i");
+    i.classList.add('far', 'fa-check-square', 'icon');
+    return i;
+}
