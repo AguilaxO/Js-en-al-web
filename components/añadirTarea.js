@@ -19,6 +19,11 @@ export const agragarTarea = (evento) => {
     const fecha = calendario.value;
     const fechaFormateada = moment(fecha).format("DD/MM/YYYY");
 
+    // Comprobar que los campos "nombre de la tarea" y "fecha" no esten vacios
+    if (value === "" || fecha === "") {
+        return;
+    }
+
     // Establecer el valor del input en un string vacio
     input.value = "";
     calendario.value = "";
