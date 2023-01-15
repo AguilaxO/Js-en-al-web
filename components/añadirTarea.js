@@ -73,8 +73,8 @@ export const createTask = ({value, fechaFormateada, tareaCompletada, id}) => {
     taskTitulo.innerText = value;
     taskContenido.appendChild(taskTitulo);
 
-    const elementoFecha = document.createElement("span");
-    elementoFecha.innerHTML = fechaFormateada;
+    // const elementoFecha = document.createElement("span");
+    // elementoFecha.innerHTML = fechaFormateada;
     
     
 
