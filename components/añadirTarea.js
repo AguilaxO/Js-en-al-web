@@ -79,7 +79,7 @@ export const createTask = ({value, fechaFormateada, tareaCompletada, id}) => {
     
 
     task.appendChild(taskContenido);
-    task.appendChild(elementoFecha);
+    // task.appendChild(elementoFecha);
     task.appendChild(iconoBorrar(id));
 	return task;
 };
