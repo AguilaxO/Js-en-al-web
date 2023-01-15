@@ -1,5 +1,6 @@
 import checkComplete from "./tareaCompletada.js";
 import iconoBorrar from "./borrarTarea.js";
+import { crearTarea } from "./leerRegistro.js";
 
 
 
@@ -24,6 +25,8 @@ export const agragarTarea = (evento) => {
         return;
     }
 
+    const tareaCompletada = false;
+
     // Establecer el valor del input en un string vacio
     input.value = "";
     calendario.value = "";
@@ -35,26 +38,36 @@ export const agragarTarea = (evento) => {
     const objetoTarea = {
         value,
         fechaFormateada,
+        tareaCompletada,
+        id: uuid.v4(),
     };
 
     listaTareas.push(objetoTarea)
 
     // Guardar mi objeto junto con sus datos en almacenamiento de sesión, la cual se pierde cada vez que se cierra la ventana
-    sessionStorage.setItem("Tareas", JSON.stringify(listaTareas));
+    // sessionStorage.setItem("Tareas", JSON.stringify(listaTareas));
     // Guardar mi objeto ahora en almacenamiento local
     localStorage.setItem("Tareas", JSON.stringify(listaTareas));
-
-    const tarea = createTask(objetoTarea);
-    lista.appendChild(tarea);
+    // Borrar todas las tareas previo a volver a crearlas de forma ordenada
+    lista.innerHTML = '';
+    crearTarea();
 }
 
-export const createTask = ({value, fechaFormateada}) => {
+export const createTask = ({value, fechaFormateada, tareaCompletada, id}) => {
+    const check = checkComplete(id);
+
+    if (tareaCompletada) {
+        check.classList.toggle("fas");
+	    check.classList.toggle("completeIcon");
+	    check.classList.toggle("far");
+    }
+    
     // Crear un nuevo li
     const task = document.createElement("li");
     // Añadir una clase al li creado arriba
     task.classList.add("card");
     const taskContenido = document.createElement("div");
-    taskContenido.appendChild(checkComplete());
+    taskContenido.appendChild(check);
     const taskTitulo = document.createElement("span");
     taskTitulo.classList.add('task');
     taskTitulo.innerText = value;
